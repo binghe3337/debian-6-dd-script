@@ -202,7 +202,7 @@ if [[ "$isMirror" == '1' ]]; then
       MirrorHost="$(echo "$TMPMirrorHost" |awk -F'://' '{print $2}')";
     else
       echo -en "\n\033[31mInvaild Mirror! \033[0m\n";
-      [[ "$linuxdists" == 'debian' ]] && echo -en "\033[33mexample:\033[0m http://deb.debian.org/debian\n\n";
+      [[ "$linuxdists" == 'debian' ]] && echo -en "\033[33mexample:\033[0m http://archive.debian.org/debian\n\n";
       [[ "$linuxdists" == 'ubuntu' ]] && echo -en "\033[33mexample:\033[0m http://archive.ubuntu.com/ubuntu\n\n";
       [[ "$linuxdists" == 'centos' ]] && echo -en "\033[33mexample:\033[0m http://mirror.centos.org/centos\n\n";
       exit 1
@@ -220,7 +220,7 @@ if [[ "$isMirror" == '1' ]]; then
 fi
 
 if [[ -z "$DISTMirror" ]]; then
-  [[ "$linuxdists" == 'debian' ]] && MirrorHost='deb.debian.org' && MirrorFolder='/debian' && DISTMirror="${MirrorHost}${MirrorFolder}";
+  [[ "$linuxdists" == 'debian' ]] && MirrorHost='archive.debian.org' && MirrorFolder='/debian' && DISTMirror="${MirrorHost}${MirrorFolder}";
   [[ "$linuxdists" == 'ubuntu' ]] && MirrorHost='archive.ubuntu.com' && MirrorFolder='/ubuntu' && DISTMirror="${MirrorHost}${MirrorFolder}";
   [[ "$linuxdists" == 'centos' ]] && DISTMirror='vault.centos.org';
 fi
@@ -265,6 +265,7 @@ if [[ -z "$DIST" ]]; then
     [[ $? -eq '0' ]] && {
       isDigital="$(echo "$DIST" |grep -o '[\.0-9]\{1,\}' |sed -n '1h;1!H;$g;s/\n//g;$p' |cut -d'.' -f1)";
       [[ -n $isDigital ]] && {
+        [[ "$isDigital" == '6' ]] && DIST='squeeze';
         [[ "$isDigital" == '7' ]] && DIST='wheezy';
         [[ "$isDigital" == '8' ]] && DIST='jessie';
         [[ "$isDigital" == '9' ]] && DIST='stretch';
