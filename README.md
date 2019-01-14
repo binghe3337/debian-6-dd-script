@@ -13,7 +13,7 @@ wget --no-check-certificate -qO InstallNET.sh 'https://raw.githubusercontent.com
 
 安装：
 
-bash InstallNET.sh -d 6 -v 32 -a -p <password>
+bash InstallNET.sh -d 6 -v 32 -a -p &lt;password&gt;
 
 打开主机控制面板的VNC：
 
